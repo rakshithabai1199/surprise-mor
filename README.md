@@ -1,14 +1,14 @@
-#Hellooooo
+#helloooo
 <!DOCTYPE html>
 <html>
 <head>
   <title>Trading Surprise</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background: #000; /* Full black background */
       color: #fff;
-      margin: 0;
       overflow: hidden;
     }
     #chart {
@@ -17,11 +17,17 @@
       left: 0;
       z-index: 0; /* Candlesticks behind */
     }
-    .message {
+    .message-box {
       position: relative;
       z-index: 1; /* Text above candles */
       text-align: center;
-      padding-top: 60px;
+      margin-top: 60px;
+      background: rgba(0,0,0,0.7); /* Semi-transparent panel */
+      padding: 30px;
+      border-radius: 10px;
+      width: 70%;
+      margin-left: auto;
+      margin-right: auto;
     }
     h1 {
       font-size: 2.5em;
@@ -38,8 +44,8 @@
   <!-- Candlestick Wallpaper -->
   <canvas id="chart"></canvas>
 
-  <!-- Text Messages AFTER candles -->
-  <div class="message">
+  <!-- Neat Text Panel AFTER candles -->
+  <div class="message-box">
     <h1>📊 Hi Sagar, Good Morning 📊</h1>
     <p>💹 "Trade with patience, profits will come." 💹</p>
     <p>💡 Get up, let’s start the day with lots of new things 💡</p>
