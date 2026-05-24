@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Trading Surprise</title>
@@ -5,16 +6,43 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #000; /* Full black background */
+      background: #000;
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      height: 100vh; /* Use full screen height */
+      overflow: hidden;
     }
-    .top-message {
+    /* Green line animation */
+    .loading-line {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 0;
+      background: #00ff00;
+      transform: translateX(-50%);
+      animation: rise 2s forwards;
+    }
+    @keyframes rise {
+      to { height: 100%; }
+    }
+    /* Hide content until animation ends */
+    .content {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .content.show {
+      opacity: 1;
+    }
+    #chart {
+      display: block;
+      width: 100%;
+      height: 70vh;
+      background: #000;
+    }
+    .top-message, .bottom-message {
       text-align: center;
       background: #111;
       padding: 15px;
+      border-top: 2px solid #00ffcc;
       border-bottom: 2px solid #00ffcc;
     }
     .top-message h1 {
@@ -23,17 +51,6 @@
       text-shadow: 2px 2px 8px #00ffaa;
       margin: 0;
     }
-    #chart {
-      flex: 1; /* Chart fills middle space */
-      width: 100%;
-      background: #000;
-    }
-    .bottom-message {
-      text-align: center;
-      background: #111;
-      padding: 20px;
-      border-top: 2px solid #00ffcc;
-    }
     .bottom-message p {
       font-size: 1.1em;
       margin: 6px 0;
@@ -41,30 +58,37 @@
   </style>
 </head>
 <body>
-  <!-- Top Greeting -->
-  <div class="top-message">
-    <h1>📊 Hi Sagar, Good Morning 📊</h1>
-  </div>
+  <!-- Green loading line -->
+  <div class="loading-line"></div>
 
-  <!-- Candlestick Chart in the middle -->
-  <canvas id="chart"></canvas>
+  <!-- Hidden content until animation finishes -->
+  <div class="content">
+    <div class="top-message">
+      <h1>📊 Hi Sagar, Good Morning 📊</h1>
+    </div>
 
-  <!-- Bottom Motivational Messages -->
-  <div class="bottom-message">
-    <p>💹 "Trade with patience, profits will come." 💹</p>
-    <p>💡 Get up, let’s start the day with lots of new things 💡</p>
-    <p>🙏 Remember, God is with you always 🙏</p>
+    <canvas id="chart"></canvas>
+
+    <div class="bottom-message">
+      <p>💹 "Trade with patience, profits will come." 💹</p>
+      <p>💡 Get up, let’s start the day with lots of new things 💡</p>
+      <p>🙏 Remember, God is with you always 🙏</p>
+    </div>
   </div>
 
   <script>
+    // Show content after line animation
+    setTimeout(() => {
+      document.querySelector('.content').classList.add('show');
+      document.querySelector('.loading-line').style.display = 'none';
+    }, 2000);
+
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
-      canvas.height = document.body.clientHeight 
-                      - document.querySelector('.top-message').offsetHeight 
-                      - document.querySelector('.bottom-message').offsetHeight;
+      canvas.height = window.innerHeight * 0.7;
     }
 
     resizeCanvas();
@@ -82,14 +106,12 @@
         let high = Math.max(open, close) + Math.random() * 25;
         let low = Math.min(open, close) - Math.random() * 25;
 
-        // Wick
         ctx.strokeStyle = "#666";
         ctx.beginPath();
         ctx.moveTo(x + candleWidth/2, low);
         ctx.lineTo(x + candleWidth/2, high);
         ctx.stroke();
 
-        // Candle body
         ctx.fillStyle = close > open ? "#00ff00" : "#ff3333";
         ctx.fillRect(x, Math.min(open, close), candleWidth, Math.abs(close - open));
 
