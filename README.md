@@ -1,4 +1,3 @@
-<!Helloo trader>
 <html>
 <head>
   <title>Trading Surprise</title>
