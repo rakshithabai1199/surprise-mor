@@ -15,26 +15,24 @@
       position: fixed;
       bottom: 0;
       left: 0;
-      width: 0;
-      height: 0;
-      border-left: 4px solid #00ff00;
+      width: 4px;
+      height: 4px;
+      background: #00ff00;
       transform-origin: bottom left;
       animation: profitLine 2s forwards;
     }
     .loading-line::after {
       content: '';
       position: absolute;
-      right: -10px;
-      top: -10px;
+      right: -8px;
+      top: -8px;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
       border-bottom: 15px solid #00ff00; /* Arrowhead */
     }
     @keyframes profitLine {
       to {
-        width: 100%;
-        height: 100%;
-        transform: rotate(-45deg); /* Diagonal upward line */
+        transform: translate(100vw, -100vh); /* Move diagonally up-right */
       }
     }
     /* Hide content until animation ends */
