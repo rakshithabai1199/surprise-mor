@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!HELLO TRADER>
 <html>
 <head>
   <title>Trading Surprise</title>
@@ -10,16 +10,25 @@
       color: #fff;
       overflow: hidden;
     }
-    /* Green line animation */
+    /* Green line with arrow animation */
     .loading-line {
       position: fixed;
       bottom: 0;
-      left: 50%;
-      width: 4px;
+      left: 0;
+      width: 0;
       height: 0;
-      background: #00ff00;
-      transform: translateX(-50%);
+      border-left: 4px solid #00ff00;
+      transform-origin: bottom left;
       animation: rise 2s forwards;
+    }
+    .loading-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -6px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 15px solid #00ff00; /* Arrowhead */
     }
     @keyframes rise {
       to { height: 100%; }
@@ -58,7 +67,7 @@
   </style>
 </head>
 <body>
-  <!-- Green loading line -->
+  <!-- Green loading line with arrow -->
   <div class="loading-line"></div>
 
   <!-- Hidden content until animation finishes -->
