@@ -10,7 +10,7 @@
       color: #fff;
       overflow: hidden;
     }
-    /* Green line with arrow animation */
+    /* Profit line animation */
     .loading-line {
       position: fixed;
       bottom: 0;
@@ -19,19 +19,23 @@
       height: 0;
       border-left: 4px solid #00ff00;
       transform-origin: bottom left;
-      animation: rise 2s forwards;
+      animation: profitLine 2s forwards;
     }
     .loading-line::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: -6px;
+      right: -10px;
+      top: -10px;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
       border-bottom: 15px solid #00ff00; /* Arrowhead */
     }
-    @keyframes rise {
-      to { height: 100%; }
+    @keyframes profitLine {
+      to {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-45deg); /* Diagonal upward line */
+      }
     }
     /* Hide content until animation ends */
     .content {
@@ -67,7 +71,7 @@
   </style>
 </head>
 <body>
-  <!-- Green loading line with arrow -->
+  <!-- Profit line animation -->
   <div class="loading-line"></div>
 
   <!-- Hidden content until animation finishes -->
