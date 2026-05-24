@@ -1,4 +1,4 @@
-# Hellooooooooo 
+#Hellooooooo
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,32 +30,45 @@
 </head>
 <body>
   <h1>📊 Hi Sagar, Good Morning 📊</h1>
-  <p>💹 "Trade smart, accept losses, ride profits." 💹</p>
+  <p>💹 "In trading, losses are lessons and profits are rewards." 💹</p>
   <p>💡 Get up, let’s start the day with lots of new things 💡</p>
   <p>🙏 Remember, God is with you always 🙏</p>
 
-  <!-- Animated Trading Line -->
-  <canvas id="chart" width="600" height="250"></canvas>
+  <!-- Candlestick Chart -->
+  <canvas id="chart" width="600" height="300"></canvas>
 
   <script>
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
 
-    function drawLine() {
+    function drawCandles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.beginPath();
-      ctx.moveTo(0, 150);
-      for (let x = 0; x < canvas.width; x++) {
-        // Simulate profit/loss waves
-        let y = 150 + 60 * Math.sin(x * 0.05 + Date.now() * 0.003);
-        ctx.lineTo(x, y);
+      let candleWidth = 20;
+      let gap = 10;
+      let x = 30;
+
+      for (let i = 0; i < 20; i++) {
+        // Random open/close values
+        let open = 150 + Math.random() * 80 - 40;
+        let close = 150 + Math.random() * 80 - 40;
+        let high = Math.max(open, close) + Math.random() * 20;
+        let low = Math.min(open, close) - Math.random() * 20;
+
+        // Candle color: green if close > open, red otherwise
+        ctx.strokeStyle = "#fff";
+        ctx.beginPath();
+        ctx.moveTo(x + candleWidth/2, low);
+        ctx.lineTo(x + candleWidth/2, high);
+        ctx.stroke();
+
+        ctx.fillStyle = close > open ? "#00ff00" : "#ff3333";
+        ctx.fillRect(x, Math.min(open, close), candleWidth, Math.abs(close - open));
+
+        x += candleWidth + gap;
       }
-      ctx.strokeStyle = '#00ff00'; // Green line for profit/loss
-      ctx.lineWidth = 2;
-      ctx.stroke();
     }
 
-    setInterval(drawLine, 50);
+    setInterval(drawCandles, 1000);
   </script>
 </body>
 </html>
