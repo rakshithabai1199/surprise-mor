@@ -8,12 +8,11 @@
       font-family: Arial, sans-serif;
       background: #000; /* Full black background */
       color: #fff;
-      overflow: hidden;
     }
     #chart {
       display: block;
       width: 100%;
-      height: 70vh; /* Candlesticks take top portion */
+      height: 80vh; /* Candlesticks take most of the page */
       background: #000;
     }
     .message-box {
@@ -36,10 +35,10 @@
   </style>
 </head>
 <body>
-  <!-- Candlestick Wallpaper at the top -->
+  <!-- Candlestick Chart at the top -->
   <canvas id="chart"></canvas>
 
-  <!-- Text Messages AFTER candles -->
+  <!-- Text Messages at the bottom, centered -->
   <div class="message-box">
     <h1>📊 Hi Sagar, Good Morning 📊</h1>
     <p>💹 "Trade with patience, profits will come." 💹</p>
@@ -51,7 +50,7 @@
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight * 0.7; // Only top portion
+    canvas.height = window.innerHeight * 0.8; // Chart takes 80% of page
 
     function drawCandles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -84,7 +83,7 @@
 
     window.onresize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.7;
+      canvas.height = window.innerHeight * 0.8;
     };
   </script>
 </body>
