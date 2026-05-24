@@ -1,4 +1,4 @@
-#SCROLL DOWN 
+<!HELLOOOO>
 <html>
 <head>
   <title>Trading Surprise</title>
@@ -12,15 +12,16 @@
     #chart {
       display: block;
       width: 100%;
-      height: 80vh; /* Candlesticks take most of the page */
+      height: 75vh; /* Candlesticks take top portion */
       background: #000;
     }
     .message-box {
       width: 100%;
       text-align: center;
       background: #111; /* Separate panel for text */
-      padding: 30px;
+      padding: 40px 20px; /* Extra padding for neat gap */
       border-top: 2px solid #00ffcc;
+      margin-top: 10px; /* Small gap between chart and text */
     }
     h1 {
       font-size: 2em;
@@ -30,7 +31,7 @@
     }
     p {
       font-size: 1.2em;
-      margin: 10px 0;
+      margin: 12px 0;
     }
   </style>
 </head>
@@ -38,7 +39,7 @@
   <!-- Candlestick Chart at the top -->
   <canvas id="chart"></canvas>
 
-  <!-- Text Messages at the bottom, centered -->
+  <!-- Text Messages at the bottom, centered neatly -->
   <div class="message-box">
     <h1>📊 Hi Sagar, Good Morning 📊</h1>
     <p>💹 "Trade with patience, profits will come." 💹</p>
@@ -50,7 +51,7 @@
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight * 0.8; // Chart takes 80% of page
+    canvas.height = window.innerHeight * 0.75; // Chart takes 75% of page
 
     function drawCandles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -83,7 +84,7 @@
 
     window.onresize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.8;
+      canvas.height = window.innerHeight * 0.75;
     };
   </script>
 </body>
