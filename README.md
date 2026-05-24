@@ -1,4 +1,4 @@
-#Helloo
+#Hellooooo
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,51 +8,43 @@
       font-family: Arial, sans-serif;
       background: #000; /* Full black background */
       color: #fff;
-      text-align: center;
-      padding-top: 40px;
+      margin: 0;
       overflow: hidden;
+    }
+    #chart {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0; /* Candlesticks behind */
+    }
+    .message {
+      position: relative;
+      z-index: 1; /* Text above candles */
+      text-align: center;
+      padding-top: 60px;
     }
     h1 {
       font-size: 2.5em;
       color: #00ffcc;
       text-shadow: 2px 2px 12px #00ffaa;
-      position: relative;
-      z-index: 1;
     }
     p {
       font-size: 1.3em;
       margin: 12px 0;
-      position: relative;
-      z-index: 1;
-    }
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6); /* Dark overlay so text is visible */
-      z-index: 0;
-    }
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1; /* Candlestick wallpaper behind everything */
     }
   </style>
 </head>
 <body>
-  <h1>📊 Hi Sagar, Good Morning 📊</h1>
-  <p>💹 "Trade with patience, profits will come." 💹</p>
-  <p>💡 Get up, let’s start the day with lots of new things 💡</p>
-  <p>🙏 Remember, God is with you always 🙏</p>
-
-  <!-- Overlay to keep text readable -->
-  <div class="overlay"></div>
-
-  <!-- Full-page Candlestick Wallpaper -->
+  <!-- Candlestick Wallpaper -->
   <canvas id="chart"></canvas>
+
+  <!-- Text Messages AFTER candles -->
+  <div class="message">
+    <h1>📊 Hi Sagar, Good Morning 📊</h1>
+    <p>💹 "Trade with patience, profits will come." 💹</p>
+    <p>💡 Get up, let’s start the day with lots of new things 💡</p>
+    <p>🙏 Remember, God is with you always 🙏</p>
+  </div>
 
   <script>
     const canvas = document.getElementById('chart');
