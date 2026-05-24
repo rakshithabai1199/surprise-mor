@@ -1,4 +1,4 @@
-<!HELLOOOO>
+<!HELLOOO TRADER MOKA SAGAR SEEE >
 <html>
 <head>
   <title>Trading Surprise</title>
@@ -6,28 +6,16 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #000;
+      background: #000; /* Full black background */
       color: #fff;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100vh; /* Use full screen height */
     }
-    #profitLineCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 10;
-      pointer-events: none;
-    }
-    #chart {
-      display: block;
-      width: 100%;
-      height: 70vh;
-      background: #000;
-    }
-    .top-message, .bottom-message {
+    .top-message {
       text-align: center;
       background: #111;
       padding: 15px;
-      border-top: 2px solid #00ffcc;
       border-bottom: 2px solid #00ffcc;
     }
     .top-message h1 {
@@ -36,6 +24,17 @@
       text-shadow: 2px 2px 8px #00ffaa;
       margin: 0;
     }
+    #chart {
+      flex: 1; /* Chart fills middle space */
+      width: 100%;
+      background: #000;
+    }
+    .bottom-message {
+      text-align: center;
+      background: #111;
+      padding: 20px;
+      border-top: 2px solid #00ffcc;
+    }
     .bottom-message p {
       font-size: 1.1em;
       margin: 6px 0;
@@ -43,16 +42,15 @@
   </style>
 </head>
 <body>
-  <!-- Profit line animation -->
-  <canvas id="profitLineCanvas"></canvas>
-
-  <!-- Always visible content -->
+  <!-- Top Greeting -->
   <div class="top-message">
     <h1>📊 Hi Sagar, Good Morning 📊</h1>
   </div>
 
+  <!-- Candlestick Chart in the middle -->
   <canvas id="chart"></canvas>
 
+  <!-- Bottom Motivational Messages -->
   <div class="bottom-message">
     <p>💹 "Trade with patience, profits will come." 💹</p>
     <p>💡 Get up, let’s start the day with lots of new things 💡</p>
@@ -60,49 +58,14 @@
   </div>
 
   <script>
-    // Profit line animation
-    const lineCanvas = document.getElementById('profitLineCanvas');
-    const lineCtx = lineCanvas.getContext('2d');
-    lineCanvas.width = window.innerWidth;
-    lineCanvas.height = window.innerHeight;
-
-    let progress = 0;
-    function animateLine() {
-      lineCtx.clearRect(0, 0, lineCanvas.width, lineCanvas.height);
-      lineCtx.strokeStyle = "#00ff00";
-      lineCtx.lineWidth = 4;
-      lineCtx.beginPath();
-      lineCtx.moveTo(0, lineCanvas.height); // bottom-left
-      lineCtx.lineTo(progress, lineCanvas.height - progress); // diagonal up-right
-      lineCtx.stroke();
-
-      // Arrowhead attached to line end
-      if (progress > 20) {
-        lineCtx.fillStyle = "#00ff00";
-        lineCtx.beginPath();
-        lineCtx.moveTo(progress, lineCanvas.height - progress);
-        lineCtx.lineTo(progress - 10, lineCanvas.height - progress - 20);
-        lineCtx.lineTo(progress + 10, lineCanvas.height - progress - 20);
-        lineCtx.closePath();
-        lineCtx.fill();
-      }
-
-      progress += 15;
-      if (progress < Math.min(lineCanvas.width, lineCanvas.height)) {
-        requestAnimationFrame(animateLine);
-      } else {
-        lineCanvas.style.display = 'none'; // remove line after animation
-      }
-    }
-    animateLine();
-
-    // Candlestick chart
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.7;
+      canvas.height = document.body.clientHeight 
+                      - document.querySelector('.top-message').offsetHeight 
+                      - document.querySelector('.bottom-message').offsetHeight;
     }
 
     resizeCanvas();
@@ -120,12 +83,14 @@
         let high = Math.max(open, close) + Math.random() * 25;
         let low = Math.min(open, close) - Math.random() * 25;
 
+        // Wick
         ctx.strokeStyle = "#666";
         ctx.beginPath();
         ctx.moveTo(x + candleWidth/2, low);
         ctx.lineTo(x + candleWidth/2, high);
         ctx.stroke();
 
+        // Candle body
         ctx.fillStyle = close > open ? "#00ff00" : "#ff3333";
         ctx.fillRect(x, Math.min(open, close), candleWidth, Math.abs(close - open));
 
