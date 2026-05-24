@@ -1,4 +1,4 @@
-#helloooo
+#Helloooo
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,7 @@
       color: #fff;
       text-align: center;
       padding-top: 40px;
+      overflow: hidden;
     }
     h1 {
       font-size: 2.5em;
@@ -21,10 +22,10 @@
       margin: 10px 0;
     }
     canvas {
-      display: block;
-      margin: 30px auto;
-      background: #000; /* Candlestick wallpaper */
-      border: 1px solid #444;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1; /* Put canvas behind text */
     }
   </style>
 </head>
@@ -34,28 +35,29 @@
   <p>💡 Get up, let’s start the day with lots of new things 💡</p>
   <p>🙏 Remember, God is with you always 🙏</p>
 
-  <!-- Candlestick Wallpaper -->
-  <canvas id="chart" width="800" height="400"></canvas>
+  <!-- Full-page Candlestick Wallpaper -->
+  <canvas id="chart"></canvas>
 
   <script>
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     function drawCandles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      let candleWidth = 10;
-      let gap = 5;
+      let candleWidth = 8;
+      let gap = 6;
       let x = 20;
 
-      for (let i = 0; i < 50; i++) {
-        // Random open/close values
-        let open = 200 + Math.random() * 100 - 50;
-        let close = 200 + Math.random() * 100 - 50;
-        let high = Math.max(open, close) + Math.random() * 20;
-        let low = Math.min(open, close) - Math.random() * 20;
+      while (x < canvas.width) {
+        let open = canvas.height/2 + Math.random() * 100 - 50;
+        let close = canvas.height/2 + Math.random() * 100 - 50;
+        let high = Math.max(open, close) + Math.random() * 30;
+        let low = Math.min(open, close) - Math.random() * 30;
 
         // Wick
-        ctx.strokeStyle = "#fff";
+        ctx.strokeStyle = "#aaa";
         ctx.beginPath();
         ctx.moveTo(x + candleWidth/2, low);
         ctx.lineTo(x + candleWidth/2, high);
@@ -69,7 +71,11 @@
       }
     }
 
-    setInterval(drawCandles, 1000);
+    setInterval(drawCandles, 800);
+    window.onresize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
   </script>
 </body>
 </html>
