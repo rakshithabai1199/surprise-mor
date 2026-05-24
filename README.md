@@ -1,4 +1,4 @@
-<!HELLO TRADER>
+<!HELLOOOO>
 <html>
 <head>
   <title>Trading Surprise</title>
@@ -10,20 +10,12 @@
       color: #fff;
       overflow: hidden;
     }
-    /* Canvas for animated profit line */
     #profitLineCanvas {
       position: fixed;
       top: 0;
       left: 0;
       z-index: 10;
-      pointer-events: none; /* Don't block clicks */
-    }
-    .content {
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-    .content.show {
-      opacity: 1;
+      pointer-events: none;
     }
     #chart {
       display: block;
@@ -51,22 +43,20 @@
   </style>
 </head>
 <body>
-  <!-- Canvas for profit line -->
+  <!-- Profit line animation -->
   <canvas id="profitLineCanvas"></canvas>
 
-  <!-- Hidden content until animation finishes -->
-  <div class="content">
-    <div class="top-message">
-      <h1>📊 Hi Sagar, Good Morning 📊</h1>
-    </div>
+  <!-- Always visible content -->
+  <div class="top-message">
+    <h1>📊 Hi Sagar, Good Morning 📊</h1>
+  </div>
 
-    <canvas id="chart"></canvas>
+  <canvas id="chart"></canvas>
 
-    <div class="bottom-message">
-      <p>💹 "Trade with patience, profits will come." 💹</p>
-      <p>💡 Get up, let’s start the day with lots of new things 💡</p>
-      <p>🙏 Remember, God is with you always 🙏</p>
-    </div>
+  <div class="bottom-message">
+    <p>💹 "Trade with patience, profits will come." 💹</p>
+    <p>💡 Get up, let’s start the day with lots of new things 💡</p>
+    <p>🙏 Remember, God is with you always 🙏</p>
   </div>
 
   <script>
@@ -101,9 +91,7 @@
       if (progress < Math.min(lineCanvas.width, lineCanvas.height)) {
         requestAnimationFrame(animateLine);
       } else {
-        // Show content after animation
-        document.querySelector('.content').classList.add('show');
-        lineCanvas.style.display = 'none';
+        lineCanvas.style.display = 'none'; // remove line after animation
       }
     }
     animateLine();
