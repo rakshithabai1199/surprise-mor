@@ -1,3 +1,4 @@
+<!Helloo trader>
 <html>
 <head>
   <title>Trading Surprise</title>
@@ -11,36 +12,46 @@
       flex-direction: column;
       height: 100vh; /* Use full screen height */
     }
-    #chart {
-      flex: 1; /* Chart fills available space */
-      width: 100%;
-      background: #000;
-    }
-    .message-box {
+    .top-message {
       text-align: center;
-      background: #111; /* Panel for text */
-      padding: 15px; /* Compact padding */
-      border-top: 2px solid #00ffcc;
+      background: #111;
+      padding: 15px;
+      border-bottom: 2px solid #00ffcc;
     }
-    h1 {
-      font-size: 1.6em;
+    .top-message h1 {
+      font-size: 1.8em;
       color: #00ffcc;
       text-shadow: 2px 2px 8px #00ffaa;
       margin: 0;
     }
-    p {
+    #chart {
+      flex: 1; /* Chart fills middle space */
+      width: 100%;
+      background: #000;
+    }
+    .bottom-message {
+      text-align: center;
+      background: #111;
+      padding: 20px;
+      border-top: 2px solid #00ffcc;
+    }
+    .bottom-message p {
       font-size: 1.1em;
       margin: 6px 0;
     }
   </style>
 </head>
 <body>
-  <!-- Candlestick Chart fills top tightly -->
+  <!-- Top Greeting -->
+  <div class="top-message">
+    <h1>📊 Hi Sagar, Good Morning 📊</h1>
+  </div>
+
+  <!-- Candlestick Chart in the middle -->
   <canvas id="chart"></canvas>
 
-  <!-- Text Messages at the bottom -->
-  <div class="message-box">
-    <h1>📊 Hi Sagar, Good Morning 📊</h1>
+  <!-- Bottom Motivational Messages -->
+  <div class="bottom-message">
     <p>💹 "Trade with patience, profits will come." 💹</p>
     <p>💡 Get up, let’s start the day with lots of new things 💡</p>
     <p>🙏 Remember, God is with you always 🙏</p>
@@ -52,7 +63,9 @@
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
-      canvas.height = document.body.clientHeight - document.querySelector('.message-box').offsetHeight;
+      canvas.height = document.body.clientHeight 
+                      - document.querySelector('.top-message').offsetHeight 
+                      - document.querySelector('.bottom-message').offsetHeight;
     }
 
     resizeCanvas();
