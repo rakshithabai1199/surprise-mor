@@ -1,5 +1,3 @@
-<!HELLOO TRADER>
-<!SCROLL DOWN TRADER>
 <html>
 <head>
   <title>Trading Surprise</title>
