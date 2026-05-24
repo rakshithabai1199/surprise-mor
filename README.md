@@ -1,4 +1,4 @@
-<!HELLO>
+<!HELLOO TRADER>
 <html>
 <head>
   <title>Trading Surprise</title>
@@ -8,23 +8,23 @@
       font-family: Arial, sans-serif;
       background: #000; /* Full black background */
       color: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh; /* Use full screen height */
     }
     #chart {
-      display: block;
+      flex: 1; /* Chart fills available space */
       width: 100%;
-      height: 70vh; /* Candlesticks take 70% of screen */
       background: #000;
     }
     .message-box {
-      width: 100%;
       text-align: center;
       background: #111; /* Panel for text */
-      padding: 20px; /* Compact padding */
+      padding: 15px; /* Compact padding */
       border-top: 2px solid #00ffcc;
-      margin-top: 2px; /* Very small gap */
     }
     h1 {
-      font-size: 1.8em;
+      font-size: 1.6em;
       color: #00ffcc;
       text-shadow: 2px 2px 8px #00ffaa;
       margin: 0;
@@ -36,10 +36,10 @@
   </style>
 </head>
 <body>
-  <!-- Candlestick Chart at the top -->
+  <!-- Candlestick Chart fills top tightly -->
   <canvas id="chart"></canvas>
 
-  <!-- Text Messages immediately after chart -->
+  <!-- Text Messages at the bottom -->
   <div class="message-box">
     <h1>📊 Hi Sagar, Good Morning 📊</h1>
     <p>💹 "Trade with patience, profits will come." 💹</p>
@@ -50,8 +50,14 @@
   <script>
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight * 0.7; // Chart fills 70% tightly
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = document.body.clientHeight - document.querySelector('.message-box').offsetHeight;
+    }
+
+    resizeCanvas();
+    window.onresize = resizeCanvas;
 
     function drawCandles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -81,11 +87,6 @@
     }
 
     setInterval(drawCandles, 1000);
-
-    window.onresize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.7;
-    };
   </script>
 </body>
 </html>
