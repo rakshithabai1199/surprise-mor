@@ -1,4 +1,3 @@
-#helloooo
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,25 +17,23 @@
       z-index: 0; /* Candlesticks behind */
     }
     .message-box {
-      position: relative;
-      z-index: 1; /* Text above candles */
+      position: fixed;
+      bottom: 0; /* Stick to bottom of page */
+      width: 100%;
       text-align: center;
-      margin-top: 60px;
-      background: rgba(0,0,0,0.7); /* Semi-transparent panel */
-      padding: 30px;
-      border-radius: 10px;
-      width: 70%;
-      margin-left: auto;
-      margin-right: auto;
+      background: rgba(0,0,0,0.8); /* Dark panel so text is visible */
+      padding: 20px;
+      z-index: 1; /* Text above candles */
     }
     h1 {
-      font-size: 2.5em;
+      font-size: 2em;
       color: #00ffcc;
-      text-shadow: 2px 2px 12px #00ffaa;
+      text-shadow: 2px 2px 10px #00ffaa;
+      margin: 0;
     }
     p {
-      font-size: 1.3em;
-      margin: 12px 0;
+      font-size: 1.2em;
+      margin: 8px 0;
     }
   </style>
 </head>
@@ -44,7 +41,7 @@
   <!-- Candlestick Wallpaper -->
   <canvas id="chart"></canvas>
 
-  <!-- Neat Text Panel AFTER candles -->
+  <!-- Text Messages at the bottom -->
   <div class="message-box">
     <h1>📊 Hi Sagar, Good Morning 📊</h1>
     <p>💹 "Trade with patience, profits will come." 💹</p>
