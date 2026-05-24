@@ -11,19 +11,17 @@
       overflow: hidden;
     }
     #chart {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0; /* Candlesticks behind */
+      display: block;
+      width: 100%;
+      height: 70vh; /* Candlesticks take top portion */
+      background: #000;
     }
     .message-box {
-      position: fixed;
-      bottom: 0; /* Stick to bottom of page */
       width: 100%;
       text-align: center;
-      background: rgba(0,0,0,0.8); /* Dark panel so text is visible */
-      padding: 20px;
-      z-index: 1; /* Text above candles */
+      background: #111; /* Separate panel for text */
+      padding: 30px;
+      border-top: 2px solid #00ffcc;
     }
     h1 {
       font-size: 2em;
@@ -33,15 +31,15 @@
     }
     p {
       font-size: 1.2em;
-      margin: 8px 0;
+      margin: 10px 0;
     }
   </style>
 </head>
 <body>
-  <!-- Candlestick Wallpaper -->
+  <!-- Candlestick Wallpaper at the top -->
   <canvas id="chart"></canvas>
 
-  <!-- Text Messages at the bottom -->
+  <!-- Text Messages AFTER candles -->
   <div class="message-box">
     <h1>📊 Hi Sagar, Good Morning 📊</h1>
     <p>💹 "Trade with patience, profits will come." 💹</p>
@@ -53,19 +51,19 @@
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight * 0.7; // Only top portion
 
     function drawCandles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      let candleWidth = 6;
-      let gap = 4;
+      let candleWidth = 8;
+      let gap = 5;
       let x = 0;
 
       while (x < canvas.width) {
-        let open = canvas.height/2 + Math.random() * 200 - 100;
-        let close = canvas.height/2 + Math.random() * 200 - 100;
-        let high = Math.max(open, close) + Math.random() * 40;
-        let low = Math.min(open, close) - Math.random() * 40;
+        let open = canvas.height/2 + Math.random() * 150 - 75;
+        let close = canvas.height/2 + Math.random() * 150 - 75;
+        let high = Math.max(open, close) + Math.random() * 30;
+        let low = Math.min(open, close) - Math.random() * 30;
 
         // Wick
         ctx.strokeStyle = "#666";
@@ -86,7 +84,7 @@
 
     window.onresize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = window.innerHeight * 0.7;
     };
   </script>
 </body>
