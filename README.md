@@ -1,4 +1,4 @@
-<!HELLOOOO>
+<!HELLOOOOO>
 <html>
 <head>
   <title>Trading Surprise</title>
@@ -12,16 +12,16 @@
     #chart {
       display: block;
       width: 100%;
-      height: 75vh; /* Candlesticks take top portion */
+      height: 78vh; /* Candlesticks take most of the page */
       background: #000;
     }
     .message-box {
       width: 100%;
       text-align: center;
-      background: #111; /* Separate panel for text */
-      padding: 40px 20px; /* Extra padding for neat gap */
+      background: #111; /* Panel for text */
+      padding: 25px 20px; /* Neat spacing */
       border-top: 2px solid #00ffcc;
-      margin-top: 10px; /* Small gap between chart and text */
+      margin-top: 5px; /* Only a little gap */
     }
     h1 {
       font-size: 2em;
@@ -31,7 +31,7 @@
     }
     p {
       font-size: 1.2em;
-      margin: 12px 0;
+      margin: 8px 0;
     }
   </style>
 </head>
@@ -51,7 +51,7 @@
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight * 0.75; // Chart takes 75% of page
+    canvas.height = window.innerHeight * 0.78; // Chart takes ~78% of page
 
     function drawCandles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -84,7 +84,7 @@
 
     window.onresize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.75;
+      canvas.height = window.innerHeight * 0.78;
     };
   </script>
 </body>
