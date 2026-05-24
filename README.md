@@ -1,4 +1,4 @@
-<!HELLOOOOOOOO>
+<!HELLO TRADER>
 <html>
 <head>
   <title>Trading Surprise</title>
@@ -16,6 +16,7 @@
       top: 0;
       left: 0;
       z-index: 10;
+      pointer-events: none; /* Don't block clicks */
     }
     .content {
       opacity: 0;
@@ -85,7 +86,7 @@
       lineCtx.lineTo(progress, lineCanvas.height - progress); // diagonal up-right
       lineCtx.stroke();
 
-      // Draw arrowhead
+      // Arrowhead attached to line end
       if (progress > 20) {
         lineCtx.fillStyle = "#00ff00";
         lineCtx.beginPath();
@@ -96,8 +97,8 @@
         lineCtx.fill();
       }
 
-      progress += 10;
-      if (progress < lineCanvas.width && progress < lineCanvas.height) {
+      progress += 15;
+      if (progress < Math.min(lineCanvas.width, lineCanvas.height)) {
         requestAnimationFrame(animateLine);
       } else {
         // Show content after animation
