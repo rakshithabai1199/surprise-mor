@@ -1,4 +1,4 @@
-<!HELLO TRADER>
+<!HELLOOOOOOOO>
 <html>
 <head>
   <title>Trading Surprise</title>
@@ -10,32 +10,13 @@
       color: #fff;
       overflow: hidden;
     }
-    /* Profit line animation */
-    .loading-line {
+    /* Canvas for animated profit line */
+    #profitLineCanvas {
       position: fixed;
-      bottom: 0;
+      top: 0;
       left: 0;
-      width: 4px;
-      height: 4px;
-      background: #00ff00;
-      transform-origin: bottom left;
-      animation: profitLine 2s forwards;
+      z-index: 10;
     }
-    .loading-line::after {
-      content: '';
-      position: absolute;
-      right: -8px;
-      top: -8px;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 15px solid #00ff00; /* Arrowhead */
-    }
-    @keyframes profitLine {
-      to {
-        transform: translate(100vw, -100vh); /* Move diagonally up-right */
-      }
-    }
-    /* Hide content until animation ends */
     .content {
       opacity: 0;
       transition: opacity 1s ease;
@@ -69,8 +50,8 @@
   </style>
 </head>
 <body>
-  <!-- Profit line animation -->
-  <div class="loading-line"></div>
+  <!-- Canvas for profit line -->
+  <canvas id="profitLineCanvas"></canvas>
 
   <!-- Hidden content until animation finishes -->
   <div class="content">
@@ -88,12 +69,45 @@
   </div>
 
   <script>
-    // Show content after line animation
-    setTimeout(() => {
-      document.querySelector('.content').classList.add('show');
-      document.querySelector('.loading-line').style.display = 'none';
-    }, 2000);
+    // Profit line animation
+    const lineCanvas = document.getElementById('profitLineCanvas');
+    const lineCtx = lineCanvas.getContext('2d');
+    lineCanvas.width = window.innerWidth;
+    lineCanvas.height = window.innerHeight;
 
+    let progress = 0;
+    function animateLine() {
+      lineCtx.clearRect(0, 0, lineCanvas.width, lineCanvas.height);
+      lineCtx.strokeStyle = "#00ff00";
+      lineCtx.lineWidth = 4;
+      lineCtx.beginPath();
+      lineCtx.moveTo(0, lineCanvas.height); // bottom-left
+      lineCtx.lineTo(progress, lineCanvas.height - progress); // diagonal up-right
+      lineCtx.stroke();
+
+      // Draw arrowhead
+      if (progress > 20) {
+        lineCtx.fillStyle = "#00ff00";
+        lineCtx.beginPath();
+        lineCtx.moveTo(progress, lineCanvas.height - progress);
+        lineCtx.lineTo(progress - 10, lineCanvas.height - progress - 20);
+        lineCtx.lineTo(progress + 10, lineCanvas.height - progress - 20);
+        lineCtx.closePath();
+        lineCtx.fill();
+      }
+
+      progress += 10;
+      if (progress < lineCanvas.width && progress < lineCanvas.height) {
+        requestAnimationFrame(animateLine);
+      } else {
+        // Show content after animation
+        document.querySelector('.content').classList.add('show');
+        lineCanvas.style.display = 'none';
+      }
+    }
+    animateLine();
+
+    // Candlestick chart
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
 
